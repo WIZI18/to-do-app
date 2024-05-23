@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+      button {
+        padding: 10px 15px;
+        margin: 5px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      input[type="text"] {
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        max-width: 300px;
+        font-size: 14px;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        width: 100%;
+        max-width: 400px;
+      }
+      li {
+        background-color: #fff;
+        margin: 5px 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      li span {
+        flex-grow: 1;
+      }
+      li button {
+        margin-left: 10px;
+        background-color: #6c757d;
+      }
+      li button:hover {
+        background-color: #5a6268;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button onclick="addRecord()">Add Item</button>
+    <input type="text" placeholder="Enter your task" id="userInput" />
+    <ul id="clicks-history"></ul>
+
+    <script>
+      var clicksHistory = document.getElementById('clicks-history')
+      var input = document.getElementById('userInput')
+      
+      function addRecord() {
+        console.log(input.value)
+
+        var li = `<li> <span>${input.value} </span> 
+        <button onclick="editThis(this)"> Edit</button>
+        <button onclick="deleteThis(this)"> Del</button> </li>`
+
+        clicksHistory.innerHTML += li
+        input.value = '' // Clear input after adding
+      }
+      
+      function deleteThis(currentElement) {
+        currentElement.parentElement.remove()
+      }
+      
+      function editThis(currentElement) {
+        var newTxt = prompt('Edit your task', currentElement.parentElement.firstElementChild.innerText)
+        if (newTxt !== null && newTxt.trim() !== '') {
+          currentElement.parentElement.firstElementChild.innerText = newTxt
+        }
+      }
+    </script>
+  </body>
+</html>
